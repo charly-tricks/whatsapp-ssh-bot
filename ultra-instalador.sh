@@ -33,7 +33,7 @@ cd whatsapp-ssh-bot
 [ -f parte1/admins.json ] && mv parte1/admins.json.
 
 # 📋 Crear admins.json si no existe
-if [! -f admins.json ]; then
+if [ ! -f admins.json ]; then
   echo ""
   read -p "📲 Ingresá tu número de WhatsApp (formato internacional sin '+', ej: 5491123456789): " numero
   echo "[\"${numero}@c.us\"]"> admins.json
