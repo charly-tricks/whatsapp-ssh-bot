@@ -11,11 +11,13 @@ echo "🚀 Instalando whatsapp-ssh-bot..."
 # 🌎 Detectar sistema operativo
 if [ -f /etc/debian_version ]; then
   echo "✅ Sistema Debian/Ubuntu detectado"
-  apt update && apt install curl git nodejs npm -y
+  apt update && apt install curl git -y
+  curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+  apt install nodejs -y
 elif [ -f /etc/redhat-release ]; then
   echo "✅ Sistema CentOS/RHEL detectado"
   yum update -y && yum install curl git -y
-  curl -sL https://rpm.nodesource.com/setup_18.x | bash -
+  curl -sL https://rpm.nodesource.com/setup_20.x | bash -
   yum install nodejs -y
 else
   echo "❌ Sistema no compatible. Este script funciona en Ubuntu, Debian, CentOS y derivados"
@@ -39,7 +41,7 @@ if [! -f admins.json ]; then
 fi
 
 # 📦 Instalar dependencias
-npm install
+npm install || echo "⚠️ Error: falta package.json o dependencias. Revisá tu repo."
 
 # 📸 Iniciar servicio QR
 nohup node qr.js> /dev/null 2>&1 &
